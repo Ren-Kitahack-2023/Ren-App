@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ren/components/signin_button.dart';
 import 'package:ren/components/login_textfield.dart';
 import 'package:ren/components/square_tile.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -14,7 +15,6 @@ class LoginPage extends StatelessWidget {
   void signUserIn() {
     print('Username: ${usernameController.text}');
     print('Password: ${passwordController.text}');
-
   }
 
   @override
@@ -27,27 +27,37 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
 
               // ren logo
               Image.asset(
                 'lib/images/ren_logo.png',
-                height: 100,
-                width: 100,
+                height: 150,
+                width: 150,
               ),
 
-              const SizedBox(height: 50),
+              const SizedBox(height: 10),
 
-              // welcome back, you've been missed!
+              // REN text
               Text(
-                'Welcome back, let your cleaning begin!',
-                style: TextStyle(
+                'Ren',
+                style: GoogleFonts.roboto(
+                  fontSize: 48, // increase the font size
+                  fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  fontSize: 16,
+                  letterSpacing: 2.0, // add some letter spacing
+                  shadows: [
+                    // add text shadows
+                    Shadow(
+                      blurRadius: 5.0,
+                      color: Colors.black,
+                      offset: Offset(3.0, 3.0),
+                    ),
+                  ],
                 ),
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 35),
 
               // username textfield
               LoginTextField(
@@ -56,17 +66,16 @@ class LoginPage extends StatelessWidget {
                 obscureText: false,
               ),
 
-              const SizedBox(height: 10),
+              const SizedBox(height: 15),
 
               // password textfield
               LoginTextField(
                 controller: passwordController,
                 hintText: "Password",
                 obscureText: true,
-                
               ),
 
-              const SizedBox(height: 10),
+              const SizedBox(height: 15),
 
               // forgot password?
               Padding(
@@ -89,7 +98,7 @@ class LoginPage extends StatelessWidget {
                 onTap: signUserIn,
               ),
 
-              const SizedBox(height: 50),
+              const SizedBox(height: 30),
 
               // or continue with
               Padding(
