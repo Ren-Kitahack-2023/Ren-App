@@ -20,6 +20,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromARGB(100, 71, 144, 78),
       body: SafeArea(
         child: Center(
@@ -39,7 +40,7 @@ class LoginPage extends StatelessWidget {
 
               // welcome back, you've been missed!
               Text(
-                'Welcome back, you\'ve been missed!',
+                'Welcome back, let your cleaning begin!',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -51,7 +52,7 @@ class LoginPage extends StatelessWidget {
               // username textfield
               LoginTextField(
                 controller: usernameController,
-                hintText: '   Username',
+                hintText: 'Username',
                 obscureText: false,
               ),
 
@@ -60,8 +61,9 @@ class LoginPage extends StatelessWidget {
               // password textfield
               LoginTextField(
                 controller: passwordController,
-                hintText: "   Password",
+                hintText: "Password",
                 obscureText: true,
+                
               ),
 
               const SizedBox(height: 10),
