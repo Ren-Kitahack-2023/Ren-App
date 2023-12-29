@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 4), // Increased duration for a slower fade-in
+      duration: Duration(seconds: 2), // Increased duration for a slower fade-in
     );
     _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
 

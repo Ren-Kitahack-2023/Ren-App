@@ -15,7 +15,28 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
+
+  // animation controller
+  late AnimationController _controller;
+  late Animation _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    );
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   // text editing controllers
   final emailController = TextEditingController();
 
@@ -74,6 +95,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    _controller.forward();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xFF132800),
@@ -86,49 +108,61 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 20),
 
                 // ren logo
-                Image.asset(
-                  'lib/images/ren_logo.png',
-                  height: 150,
-                  width: 150,
+                FadeTransition(
+                  opacity: _animation as Animation<double>,
+                  child: Image.asset(
+                    'lib/images/ren_logo.png',
+                    height: 150,
+                    width: 150,
+                  ),
                 ),
 
                 const SizedBox(height: 20),
 
                 // REN text
-                Text(
-                  'Ren',
-                  style: GoogleFonts.roboto(
-                    fontSize: 48, // increase the font size
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    letterSpacing: 2.0, // add some letter spacing
-                    shadows: [
-                      // add text shadows
-                      Shadow(
-                        blurRadius: 5.0,
-                        color: Colors.black,
-                        offset: Offset(3.0, 3.0),
-                      ),
-                    ],
+                FadeTransition(
+                  opacity: _animation as Animation<double>,
+                  child: Text(
+                    'Ren',
+                    style: GoogleFonts.roboto(
+                      fontSize: 48, // increase the font size
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      letterSpacing: 2.0, // add some letter spacing
+                      shadows: [
+                        // add text shadows
+                        Shadow(
+                          blurRadius: 5.0,
+                          color: Colors.black,
+                          offset: Offset(3.0, 3.0),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
 
                 const SizedBox(height: 35),
 
                 // username textfield
-                LoginTextField(
-                  controller: emailController,
-                  hintText: 'Email',
-                  obscureText: false,
+                FadeTransition(
+                  opacity: _animation as Animation<double>,
+                  child: LoginTextField(
+                    controller: emailController,
+                    hintText: 'Email',
+                    obscureText: false,
+                  ),
                 ),
 
                 const SizedBox(height: 15),
 
                 // password textfield
-                LoginTextField(
-                  controller: passwordController,
-                  hintText: "Password",
-                  obscureText: true,
+                FadeTransition(
+                  opacity: _animation as Animation<double>,
+                  child: LoginTextField(
+                    controller: passwordController,
+                    hintText: "Password",
+                    obscureText: true,
+                  ),
                 ),
 
                 const SizedBox(height: 15),
@@ -150,9 +184,12 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 20),
 
                 // sign in button
-                SignInButton(
-                  text: "Sign In",
-                  onTap: signUserIn,
+                FadeTransition(
+                  opacity: _animation as Animation<double>,
+                  child: SignInButton(
+                    text: "Sign In",
+                    onTap: signUserIn,
+                  ),
                 ),
 
                 const SizedBox(height: 30),
@@ -192,14 +229,19 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // google button
-                    SquareTile(
-                        onTap: () => AuthService().signInWithGoogle(),
-                        imagePath: 'lib/images/google.png'),
+                    FadeTransition(
+                      opacity: _animation as Animation<double>,
+                      child: SquareTile(
+                          onTap: () => AuthService().signInWithGoogle(),
+                          imagePath: 'lib/images/google.png'),
+                    ),
 
                     SizedBox(width: 25),
 
                     // apple button
-                    SquareTile(onTap: () {}, imagePath: 'lib/images/apple.png')
+                    FadeTransition(
+                      opacity: _animation as Animation<double>,
+                      child: SquareTile(onTap: () {}, imagePath: 'lib/images/apple.png'))
                   ],
                 ),
 
