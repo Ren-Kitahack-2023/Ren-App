@@ -5,25 +5,25 @@ import 'package:ren/components/login_textfield.dart';
 import 'package:ren/components/square_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatefulWidget {
+class RegistrationPage extends StatefulWidget {
 
   final Function()? onTap;
 
-  LoginPage({super.key, required this.onTap});
+  RegistrationPage({super.key, required this.onTap});
 
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegistrationPageState extends State<RegistrationPage> {
   // text editing controllers
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
 
   // sign user in method
-  void signUserIn() async {
+  void signUserUp() async {
     // loading animation thingy
     showDialog(
       context: context,
@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
 
-    // sign user in
+    // try to create a new user
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
@@ -88,8 +88,8 @@ class _LoginPageState extends State<LoginPage> {
                 // ren logo
                 Image.asset(
                   'lib/images/ren_logo.png',
-                  height: 150,
-                  width: 150,
+                  height: 75,
+                  width: 75,
                 ),
             
                 const SizedBox(height: 10),
@@ -130,6 +130,17 @@ class _LoginPageState extends State<LoginPage> {
                   hintText: "Password",
                   obscureText: true,
                 ),
+
+                const SizedBox(height: 15),
+
+                // Confirm password textfield
+                LoginTextField(
+                  controller: passwordController,
+                  hintText: "Confirm Password",
+                  obscureText: true,
+                ),
+
+
             
                 const SizedBox(height: 15),
             
@@ -151,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
             
                 // sign in button
                 SignInButton(
-                  onTap: signUserIn,
+                  onTap: signUserUp,
                 ),
             
                 const SizedBox(height: 30),
@@ -207,14 +218,14 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Not a member?',
+                      'Already have an account?',
                       style: TextStyle(color: Colors.grey[700]),
                     ),
                     const SizedBox(width: 4),
                     GestureDetector(
                       onTap: widget.onTap,
                       child: const Text(
-                        'Register now',
+                        'Login now',
                         style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
