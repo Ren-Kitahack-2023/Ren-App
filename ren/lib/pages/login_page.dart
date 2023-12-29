@@ -4,6 +4,7 @@ import 'package:ren/components/signin_button.dart';
 import 'package:ren/components/login_textfield.dart';
 import 'package:ren/components/square_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ren/services/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
@@ -189,14 +190,16 @@ class _LoginPageState extends State<LoginPage> {
                 // google + apple sign in buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     // google button
-                    SquareTile(imagePath: 'lib/images/google.png'),
+                    SquareTile(
+                        onTap: () => AuthService().signInWithGoogle(),
+                        imagePath: 'lib/images/google.png'),
 
                     SizedBox(width: 25),
 
                     // apple button
-                    SquareTile(imagePath: 'lib/images/apple.png')
+                    SquareTile(onTap: () {}, imagePath: 'lib/images/apple.png')
                   ],
                 ),
 

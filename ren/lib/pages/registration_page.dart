@@ -4,6 +4,7 @@ import 'package:ren/components/signin_button.dart';
 import 'package:ren/components/login_textfield.dart';
 import 'package:ren/components/square_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ren/services/auth_service.dart';
 
 class RegistrationPage extends StatefulWidget {
   final Function()? onTap;
@@ -36,21 +37,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
     // try to create a new user
     try {
-    
-
       // check if password is confirmed
       if (passwordController.text == confirmPasswordController.text) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
+          email: emailController.text,
+          password: passwordController.text,
+        );
         Navigator.pop(context);
       } else {
         Navigator.pop(context);
         // display the dialog
         displayWrongEmailorPasswordDialog(context, "Passwords don't match");
       }
-
     } on FirebaseAuthException catch (e) {
       // pop the loading animation thingy
       Navigator.pop(context);
@@ -185,14 +183,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 // google + apple sign in buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     // google button
-                    SquareTile(imagePath: 'lib/images/google.png'),
+                    SquareTile(
+                        onTap: () => AuthService().signInWithGoogle(),
+                        imagePath: 'lib/images/google.png'),
 
                     SizedBox(width: 25),
 
                     // apple button
-                    SquareTile(imagePath: 'lib/images/apple.png')
+                    SquareTile(onTap: () {}, imagePath: 'lib/images/apple.png')
                   ],
                 ),
 
