@@ -67,6 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '832807880844',
     projectId: 'ren-kitahack-2024',
     storageBucket: 'ren-kitahack-2024.appspot.com',
+    iosClientId: '832807880844-okfh2n62krhfsmpq2cm77ecgci3vf7ml.apps.googleusercontent.com',
     iosBundleId: 'com.example.ren',
   );
 
@@ -76,6 +77,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '832807880844',
     projectId: 'ren-kitahack-2024',
     storageBucket: 'ren-kitahack-2024.appspot.com',
+    iosClientId: '832807880844-g5n2tr5br3cpto21oku728rjk2et5669.apps.googleusercontent.com',
     iosBundleId: 'com.example.ren.RunnerTests',
   );
 }
