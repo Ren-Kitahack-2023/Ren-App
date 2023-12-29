@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Roboto',
+        useMaterial3: true,
       ),
 
       debugShowCheckedModeBanner: false,
