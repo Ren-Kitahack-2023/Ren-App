@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black, 
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white.withOpacity(.60),
         selectedFontSize: 14,

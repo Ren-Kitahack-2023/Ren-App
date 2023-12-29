@@ -54,9 +54,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(actions: [
-        IconButton(onPressed: userSignOut, icon: Icon(Icons.logout))
-      ]),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
