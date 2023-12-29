@@ -6,11 +6,9 @@ import 'package:ren/components/square_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RegistrationPage extends StatefulWidget {
-
   final Function()? onTap;
 
   RegistrationPage({super.key, required this.onTap});
-
 
   @override
   State<RegistrationPage> createState() => _RegistrationPageState();
@@ -21,6 +19,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
+
+  final confirmPasswordController = TextEditingController();
 
   // sign user in method
   void signUserUp() async {
@@ -36,40 +36,49 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
     // try to create a new user
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+    
+
+      // check if password is confirmed
+      if (passwordController.text == confirmPasswordController.text) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
-
-      // pop the loading animation thingy
-      Navigator.pop(context);
+      } else {
+        Navigator.pop(context);
+        // display the dialog
+        displayWrongEmailorPasswordDialog(context, "Passwords don't match");
+      }
 
     } on FirebaseAuthException catch (e) {
       // pop the loading animation thingy
       Navigator.pop(context);
 
       // the user tyes in the wrong email
-      if (e.code == 'user-not-found' || e.code == 'invalid-email' || e.code == 'wrong-password' || e.message!.contains('The supplied auth credential is incorrect')) {
-            print(e.code);
-            displayWrongEmailorPasswordDialog(context);
-          } else if (e.code == 'wrong-password' || e.message!.contains('The supplied auth credential is incorrect')) {
-            print(e.code);
-            displayWrongEmailorPasswordDialog(context);
-          }
-          }
-
+      if (e.code == 'user-not-found' ||
+          e.code == 'invalid-email' ||
+          e.code == 'wrong-password' ||
+          e.message!.contains('The supplied auth credential is incorrect')) {
+        print(e.code);
+        displayWrongEmailorPasswordDialog(context, "Wrong email or password");
+      } else if (e.code == 'wrong-password' ||
+          e.message!.contains('The supplied auth credential is incorrect')) {
+        print(e.code);
+        displayWrongEmailorPasswordDialog(context, "Wrong email or password");
+      }
+    }
   }
 
   // WRONG EMAIL DIALOG
-  void displayWrongEmailorPasswordDialog(BuildContext context) {
+  void displayWrongEmailorPasswordDialog(BuildContext context, String message) {
     showDialog(
-        context: context,
-        builder: (context) {
-          return const AlertDialog(
-            title: Text('Wrong Email or Password'),
-          );
-        }
-      );
+      context: context,
+      builder: (context) {
+        return new AlertDialog(
+          title: Text(message),
+        );
+      },
+    );
   }
 
   @override
@@ -84,46 +93,38 @@ class _RegistrationPageState extends State<RegistrationPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 20),
-            
+
                 // ren logo
                 Image.asset(
                   'lib/images/ren_logo.png',
                   height: 75,
                   width: 75,
                 ),
-            
-                const SizedBox(height: 10),
-            
+
+                const SizedBox(height: 20),
+
                 // REN text
                 Text(
-                  'Ren',
+                  'Let\'s get you an account!',
                   style: GoogleFonts.roboto(
-                    fontSize: 48, // increase the font size
+                    fontSize: 18, // increase the font size
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                     letterSpacing: 2.0, // add some letter spacing
-                    shadows: [
-                      // add text shadows
-                      Shadow(
-                        blurRadius: 5.0,
-                        color: Colors.black,
-                        offset: Offset(3.0, 3.0),
-                      ),
-                    ],
                   ),
                 ),
-            
+
                 const SizedBox(height: 35),
-            
+
                 // username textfield
                 LoginTextField(
                   controller: emailController,
                   hintText: 'Email',
                   obscureText: false,
                 ),
-            
+
                 const SizedBox(height: 15),
-            
+
                 // password textfield
                 LoginTextField(
                   controller: passwordController,
@@ -135,38 +136,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
                 // Confirm password textfield
                 LoginTextField(
-                  controller: passwordController,
+                  controller: confirmPasswordController,
                   hintText: "Confirm Password",
                   obscureText: true,
                 ),
 
-
-            
                 const SizedBox(height: 15),
-            
-                // forgot password?
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Forgot Password?',
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                    ],
-                  ),
-                ),
-            
-                const SizedBox(height: 20),
-            
+
                 // sign in button
                 SignInButton(
+                  text: 'Sign Up',
                   onTap: signUserUp,
                 ),
-            
+
                 const SizedBox(height: 30),
-            
+
                 // or continue with
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -194,25 +178,25 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ],
                   ),
                 ),
-            
+
                 const SizedBox(height: 20),
-            
+
                 // google + apple sign in buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     // google button
                     SquareTile(imagePath: 'lib/images/google.png'),
-            
+
                     SizedBox(width: 25),
-            
+
                     // apple button
                     SquareTile(imagePath: 'lib/images/apple.png')
                   ],
                 ),
-            
+
                 const SizedBox(height: 20),
-            
+
                 // not a member? register now
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

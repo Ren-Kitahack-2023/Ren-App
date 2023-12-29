@@ -6,11 +6,9 @@ import 'package:ren/components/square_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
-
   final Function()? onTap;
 
   LoginPage({super.key, required this.onTap});
-
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -43,21 +41,23 @@ class _LoginPageState extends State<LoginPage> {
 
       // pop the loading animation thingy
       Navigator.pop(context);
-
     } on FirebaseAuthException catch (e) {
       // pop the loading animation thingy
       Navigator.pop(context);
 
       // the user tyes in the wrong email
-      if (e.code == 'user-not-found' || e.code == 'invalid-email' || e.code == 'wrong-password' || e.message!.contains('The supplied auth credential is incorrect')) {
-            print(e.code);
-            displayWrongEmailorPasswordDialog(context);
-          } else if (e.code == 'wrong-password' || e.message!.contains('The supplied auth credential is incorrect')) {
-            print(e.code);
-            displayWrongEmailorPasswordDialog(context);
-          }
-          }
-
+      if (e.code == 'user-not-found' ||
+          e.code == 'invalid-email' ||
+          e.code == 'wrong-password' ||
+          e.message!.contains('The supplied auth credential is incorrect')) {
+        print(e.code);
+        displayWrongEmailorPasswordDialog(context);
+      } else if (e.code == 'wrong-password' ||
+          e.message!.contains('The supplied auth credential is incorrect')) {
+        print(e.code);
+        displayWrongEmailorPasswordDialog(context);
+      }
+    }
   }
 
   // WRONG EMAIL DIALOG
@@ -68,8 +68,7 @@ class _LoginPageState extends State<LoginPage> {
           return const AlertDialog(
             title: Text('Wrong Email or Password'),
           );
-        }
-      );
+        });
   }
 
   @override
@@ -84,16 +83,16 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 20),
-            
+
                 // ren logo
                 Image.asset(
                   'lib/images/ren_logo.png',
                   height: 150,
                   width: 150,
                 ),
-            
-                const SizedBox(height: 10),
-            
+
+                const SizedBox(height: 20),
+
                 // REN text
                 Text(
                   'Ren',
@@ -112,27 +111,27 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-            
+
                 const SizedBox(height: 35),
-            
+
                 // username textfield
                 LoginTextField(
                   controller: emailController,
                   hintText: 'Email',
                   obscureText: false,
                 ),
-            
+
                 const SizedBox(height: 15),
-            
+
                 // password textfield
                 LoginTextField(
                   controller: passwordController,
                   hintText: "Password",
                   obscureText: true,
                 ),
-            
+
                 const SizedBox(height: 15),
-            
+
                 // forgot password?
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -146,16 +145,17 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-            
+
                 const SizedBox(height: 20),
-            
+
                 // sign in button
                 SignInButton(
+                  text: "Sign In",
                   onTap: signUserIn,
                 ),
-            
+
                 const SizedBox(height: 30),
-            
+
                 // or continue with
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -183,25 +183,25 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-            
+
                 const SizedBox(height: 20),
-            
+
                 // google + apple sign in buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     // google button
                     SquareTile(imagePath: 'lib/images/google.png'),
-            
+
                     SizedBox(width: 25),
-            
+
                     // apple button
                     SquareTile(imagePath: 'lib/images/apple.png')
                   ],
                 ),
-            
+
                 const SizedBox(height: 20),
-            
+
                 // not a member? register now
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
