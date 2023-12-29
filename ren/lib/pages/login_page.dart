@@ -5,27 +5,79 @@ import 'package:ren/components/login_textfield.dart';
 import 'package:ren/components/square_tile.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   // text editing controllers
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
 
   // sign user in method
   void signUserIn() async {
+    // loading animation thingy
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
+    // sign user in
     try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
+
+      // pop the loading animation thingy
+      Navigator.pop(context);
+
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
-    }
+      // pop the loading animation thingy
+      Navigator.pop(context);
+
+      // the user tyes in the wrong email
+      if (e.code == 'user-not-found' || e.code == 'invalid-email' || e.code == 'wrong-password' || e.message!.contains('The supplied auth credential is incorrect')) {
+            print(e.code);
+            displayWrongEmailDialog(context);
+          } else if (e.code == 'wrong-password' || e.message!.contains('The supplied auth credential is incorrect')) {
+            print(e.code);
+            displayWrongPasswordDialog(context);
+          }
+          }
+
+  }
+
+  // WRONG EMAIL DIALOG
+  void displayWrongEmailDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            title: Text('Wrong Email or Password'),
+          );
+        }
+      );
+  }
+
+  // WRONG PASSWORD DIALOG
+  void displayWrongPasswordDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            title: Text('Wrong Password or Password'),
+          );
+        }
+      );
   }
 
   @override
