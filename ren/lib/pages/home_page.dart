@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:ren/pages/logged_in_pages/explore_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,11 +13,8 @@ class _HomePageState extends State<HomePage> {
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Explore Page',
-      style: optionStyle,
-    ),
+  final List<Widget> _widgetOptions = <Widget>[
+    ExplorePage(),
     Text(
       'Community Page',
       style: optionStyle,
