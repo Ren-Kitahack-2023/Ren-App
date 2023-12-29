@@ -44,6 +44,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         email: emailController.text,
         password: passwordController.text,
       );
+        Navigator.pop(context);
       } else {
         Navigator.pop(context);
         // display the dialog
