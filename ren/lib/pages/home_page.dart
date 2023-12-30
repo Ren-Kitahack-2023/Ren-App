@@ -3,41 +3,155 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ren/pages/logged_in_pages/explore_page.dart';
 
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  var selectedItem = 0;
 
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  final List<Widget> _widgetOptions = <Widget>[
+  List children = [
     ExplorePage(),
-    Text(
-      'Community Page',
-      style: optionStyle,
-    ),
-    Text(
-      'Ren Page',
-      style: optionStyle,
-    ),
-    Text(
-      'Rewards Page',
-      style: optionStyle,
-    ),
-    Text(
-      'Profile Page',
-      style: optionStyle,
-    ),
+    ExplorePage(),
+    ExplorePage(),
+    ExplorePage(),
+    ExplorePage(),
   ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF202020),
+      body: children[selectedItem],
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color(0xFF1B1B1B),
+        selectedItemColor: Color(0xFF8E8E93),
+        iconSize: 27.0,
+        currentIndex: selectedItem,
+        unselectedLabelStyle: TextStyle(color: Color(0xFF1B1B1B)),
+        unselectedItemColor: Color(0xFF888888),
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        onTap: (currIndex) {
+          setState(() {
+            selectedItem = currIndex;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            backgroundColor: Color(0xFF1B1B1B),
+            icon: Stack( // Use Stack to place elements on top of each other
+              children: <Widget>[
+                Icon(Icons.explore),
+                Positioned( // Position your indicator or badge
+                  right: 0,
+                  top: 0,
+                  child: Container(
+                    height: 5.0,
+                    width: 5.0,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFFB5DBAA),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            label: 'Explore',
+          ),
+          BottomNavigationBarItem(
+            backgroundColor: Color(0xFF1B1B1B),
+            icon: Stack( // Use Stack to place elements on top of each other
+              children: <Widget>[
+                Icon(Icons.people),
+                Positioned( // Position your indicator or badge
+                  right: 0,
+                  top: 0,
+                  child: Container(
+                    height: 5.0,
+                    width: 5.0,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFFB5DBAA),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            label: 'Community',
+          ),
+          BottomNavigationBarItem(
+            backgroundColor: Color(0xFF1B1B1B),
+            icon: Stack( // Use Stack to place elements on top of each other
+              children: <Widget>[
+                Icon(Icons.place),
+                Positioned( // Position your indicator or badge
+                  right: 0,
+                  top: 0,
+                  child: Container(
+                    height: 5.0,
+                    width: 5.0,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFFB5DBAA),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            label: 'Ren',
+          ),
+          BottomNavigationBarItem(
+            backgroundColor: Color(0xFF1B1B1B),
+            icon: Stack( // Use Stack to place elements on top of each other
+              children: <Widget>[
+                Icon(Icons.card_giftcard),
+                Positioned( // Position your indicator or badge
+                  right: 0,
+                  top: 0,
+                  child: Container(
+                    height: 5.0,
+                    width: 5.0,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFFB5DBAA),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            label: 'Rewards',
+          ),
+          BottomNavigationBarItem(
+            backgroundColor: Color(0xFF1B1B1B),
+            icon: Stack( // Use Stack to place elements on top of each other
+              children: <Widget>[
+                Icon(Icons.person),
+                Positioned( // Position your indicator or badge
+                  right: 0,
+                  top: 0,
+                  child: Container(
+                    height: 5.0,
+                    width: 5.0,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFFB5DBAA),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            label: 'Profile',
+          ),
+        ],
+      ),
+    );
   }
+}
+
+
 
   // Sign user out method
   void userSignOut() async {
@@ -46,105 +160,3 @@ class _HomePageState extends State<HomePage> {
     // sign out from google
     await GoogleSignIn().signOut();
   }
-
-  // appBar: AppBar(
-  //       actions: [IconButton(onPressed: userSignOut, icon: Icon(Icons.logout))]),
-  //   );
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        color: Color(0xFF1C1C1E),
-        child: Container(
-          height: kBottomNavigationBarHeight,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(5, (index) => _buildNavItem(index)),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(int index) {
-    bool isSelected = _selectedIndex == index;
-    IconData iconData;
-    String text;
-    switch (index) {
-      case 0:
-        iconData = Icons.search;
-        text = 'Explore';
-        break;
-      case 1:
-        iconData = Icons.people;
-        text = 'Community';
-        break;
-      case 2:
-        iconData = Icons.place;
-        text = 'Ren';
-        break;
-      case 3:
-        iconData = Icons.card_giftcard;
-        text = 'Rewards';
-        break;
-      case 4:
-        iconData = Icons.person;
-        text = 'Profile';
-        break;
-      default:
-        iconData = Icons.error;
-        text = 'Error';
-    }
-    // Adjust the overall padding if necessary
-    double sidePadding = 8.0;
-    double totalWidth = MediaQuery.of(context).size.width - (sidePadding * 2);
-
-    return Expanded(
-      child: InkWell(
-        onTap: () => _onItemTapped(index),
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        child: Container(
-          height: kBottomNavigationBarHeight,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AnimatedContainer(
-                duration: Duration(milliseconds: 250),
-                padding: isSelected
-                    ? EdgeInsets.all(6)
-                    : EdgeInsets
-                        .zero, // Adjust padding to control the size of the highlight
-                decoration: isSelected
-                    ? BoxDecoration(
-                        color: const Color(0xFFB5DBAA), // The green color
-                        borderRadius: BorderRadius.circular(10),
-                      )
-                    : null,
-                child: Icon(
-                  iconData,
-                  color:
-                      isSelected ? Colors.white : Colors.white.withOpacity(0.6),
-                  size: 24,
-                ),
-              ),
-              Text(
-                text,
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.6),
-                  fontWeight: FontWeight.normal,
-                  fontSize: 11,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
