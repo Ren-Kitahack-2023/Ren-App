@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ren/components/following_tab_community_page.dart';
+import 'package:ren/components/local_tab_community_page.dart';
 
 class CommunityPage extends StatelessWidget {
   @override
@@ -61,8 +63,8 @@ class CommunityPage extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  buildLocalTab(),
-                  buildFollowingTab(),
+                  LocalTabCommunityPage(),
+                  FollowingTabCommunityPage(),
                 ],
               ),
             ),
