@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:ren/pages/logged_in_pages/community_page.dart';
 import 'package:ren/pages/logged_in_pages/explore_page.dart';
 import 'package:ren/pages/logged_in_pages/profile_page.dart';
 
@@ -14,7 +15,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> children = [
     ExplorePage(),
-    ExplorePage(),
+    CommunityPage(),
     ExplorePage(),
     ExplorePage(),
     ProfilePage(),
