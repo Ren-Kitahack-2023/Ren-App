@@ -8,67 +8,83 @@ class CommunityPage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: Color(0xFF202020), // Dark background color
+        backgroundColor: Color(0xFF1C1C1E),
         appBar: AppBar(
-          backgroundColor: Color(0xFF1C1C1E), // AppBar color to match the design
+          backgroundColor: Color(0xFF1C1C1E),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.notifications_none, color: Colors.white),
-              onPressed: () {
-                // TODO: Add notification action
-              },
+              onPressed: () {},
             ),
             IconButton(
               icon: Icon(Icons.person_add, color: Colors.white),
-              onPressed: () {
-                // TODO: Add profile action
-              },
+              onPressed: () {},
             ),
           ],
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(kToolbarHeight),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: TabBar(
-                indicatorColor: Colors.green, // Tab indicator color
-                labelColor: Colors.white, // Selected label color
-                unselectedLabelColor: Colors.grey, // Unselected label color
-                tabs: [
-                  Tab(text: 'Local'),
-                  Tab(text: 'Following'),
-                ],
-              ),
+          bottom: TabBar(
+            indicatorColor: Color(0xFFB5DBAA),
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.white.withOpacity(0.5),
+            labelStyle: TextStyle(
+              fontWeight: FontWeight.bold,
             ),
+            unselectedLabelStyle: TextStyle(
+              fontWeight: FontWeight.normal,
+            ),
+            tabs: [
+              Tab(text: 'Local'),
+              Tab(text: 'Following'),
+            ],
           ),
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
-            child: Text(
-              'Latest\nnearby',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold, // Adjust weight as necessary
-                letterSpacing: 0.8, // Adjust letter spacing as necessary
+        body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Latest',
+                          style: TextStyle(
+                            color: Colors.grey[500],
+                            fontFamily: 'Roboto',
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.0,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '\nnearby',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Roboto',
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-            ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+                  child: buildSearchBar(),
+                ),
+              ),
+            ];
+          },
+          body: TabBarView(
+            children: [
+              LocalTabCommunityPage(),
+              FollowingTabCommunityPage(),
+            ],
           ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-              child: buildSearchBar(),
-            ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  LocalTabCommunityPage(),
-                  FollowingTabCommunityPage(),
-                ],
-              ),
-            ),
-          ],
         ),
       ),
     );
@@ -84,23 +100,39 @@ class CommunityPage extends StatelessWidget {
     return Center(child: Text('Following Tab'));
   }
 
-  Widget buildSearchBar() {
-    return Container(
-      height: 36,
-      decoration: BoxDecoration(
-        color: Colors.grey[800], // Adjust color to match design
-        borderRadius: BorderRadius.circular(18), // Rounded corners
-      ),
-      child: TextField(
-        decoration: InputDecoration(
-          hintText: 'Explore by destination',
-          hintStyle: TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.5)),
-          prefixIcon: Icon(Icons.search, color: Colors.white.withOpacity(0.5)),
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(vertical: 0), // Center the text vertically
+Widget buildSearchBar() {
+  return Container(
+    height: 36,
+    decoration: BoxDecoration(
+      color: Colors.grey[800], // Adjust color to match design
+      borderRadius: BorderRadius.circular(18), // Rounded corners
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.25),
+          spreadRadius: 0,
+          blurRadius: 4,
+          offset: Offset(0, 2),
         ),
-        style: TextStyle(color: Colors.white),
+      ],
+    ),
+    child: TextField(
+      decoration: InputDecoration(
+        hintText: 'Explore by destination',
+        hintStyle: TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.5)),
+        prefixIcon: Icon(Icons.search, color: Colors.white.withOpacity(0.5)),
+        suffixIcon: IconButton(
+          icon: Icon(Icons.clear, color: Colors.white.withOpacity(0.5)),
+          onPressed: () {/* Clear search logic here */},
+        ),
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.symmetric(vertical: 0), // Center the text vertically
       ),
-    );
-  }
+      style: TextStyle(color: Colors.white),
+      onTap: () {
+        // Add animation or style changes on tap if needed
+      },
+    ),
+  );
+}
+
 }
