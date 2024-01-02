@@ -11,6 +11,21 @@ class CommunityPage extends StatelessWidget {
         backgroundColor: Color(0xFF1C1C1E),
         appBar: AppBar(
           backgroundColor: Color(0xFF1C1C1E),
+          leading: Container(
+            constraints: BoxConstraints(maxHeight: 40, maxWidth: 80), // Constrain the leading area size
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 12.0), // Control the space between the logo and the text
+                  child: Image.asset(
+                    'lib/images/ren_logo.png', // Replace with your asset path
+                    fit: BoxFit.fitHeight, // Adjust the fit to maintain aspect ratio
+                  ),
+                ),
+              ],
+            ),
+          ),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.notifications_none, color: Colors.white),
@@ -102,39 +117,40 @@ class CommunityPage extends StatelessWidget {
     return Center(child: Text('Following Tab'));
   }
 
-Widget buildSearchBar() {
-  return Container(
-    height: 36,
-    decoration: BoxDecoration(
-      color: Colors.grey[800], // Adjust color to match design
-      borderRadius: BorderRadius.circular(18), // Rounded corners
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.25),
-          spreadRadius: 0,
-          blurRadius: 4,
-          offset: Offset(0, 2),
-        ),
-      ],
-    ),
-    child: TextField(
-      decoration: InputDecoration(
-        hintText: 'Explore by destination',
-        hintStyle: TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.5)),
-        prefixIcon: Icon(Icons.search, color: Colors.white.withOpacity(0.5)),
-        suffixIcon: IconButton(
-          icon: Icon(Icons.clear, color: Colors.white.withOpacity(0.5)),
-          onPressed: () {/* Clear search logic here */},
-        ),
-        border: InputBorder.none,
-        contentPadding: EdgeInsets.symmetric(vertical: 0), // Center the text vertically
+  Widget buildSearchBar() {
+    return Container(
+      height: 36,
+      decoration: BoxDecoration(
+        color: Colors.grey[800], // Adjust color to match design
+        borderRadius: BorderRadius.circular(18), // Rounded corners
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.25),
+            spreadRadius: 0,
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
       ),
-      style: TextStyle(color: Colors.white),
-      onTap: () {
-        // Add animation or style changes on tap if needed
-      },
-    ),
-  );
-}
-
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: 'Explore by destination',
+          hintStyle:
+              TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.5)),
+          prefixIcon: Icon(Icons.search, color: Colors.white.withOpacity(0.5)),
+          suffixIcon: IconButton(
+            icon: Icon(Icons.clear, color: Colors.white.withOpacity(0.5)),
+            onPressed: () {/* Clear search logic here */},
+          ),
+          border: InputBorder.none,
+          contentPadding:
+              EdgeInsets.symmetric(vertical: 0), // Center the text vertically
+        ),
+        style: TextStyle(color: Colors.white),
+        onTap: () {
+          // Add animation or style changes on tap if needed
+        },
+      ),
+    );
+  }
 }
