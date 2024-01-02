@@ -37,59 +37,58 @@ class CommunityPage extends StatelessWidget {
             ],
           ),
         ),
-        body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
-                  child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'Latest',
-                          style: TextStyle(
-                            color: Colors.grey[500],
-                            fontFamily: 'Roboto',
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.0,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '\nnearby',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Roboto',
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.0,
-                          ),
-
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ];
-          },
-          body: Column(
-            children: [
-              SizedBox(height: 8),
-              buildSearchBar(), // Now part of the scrollable content
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    LocalTabCommunityPage(),
-                    FollowingTabCommunityPage(),
-                  ],
-                ),
-              ),
-            ],
-          ),
+        body: TabBarView(
+          children: [
+            // Only the Local tab should include the Latest nearby and search bar
+            LocalTabWithSearch(),
+            // The Following tab remains unchanged
+            FollowingTabCommunityPage(),
+          ],
         ),
       ),
+    );
+  }
+
+  Widget LocalTabWithSearch() {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Latest',
+                    style: TextStyle(
+                      color: Colors.grey[500],
+                      fontFamily: 'Roboto',
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.0,
+                    ),
+                  ),
+                  TextSpan(
+                    text: '\nnearby',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Roboto',
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.0,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        buildSearchBar(),
+        Expanded(
+          child: LocalTabCommunityPage(),
+        ),
+      ],
     );
   }
 
