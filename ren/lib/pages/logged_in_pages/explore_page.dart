@@ -2,6 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:ren/components/ren_cards.dart';
 
 class ExplorePage extends StatelessWidget {
+  final List<RenCard> renInfo = [
+    RenCard(
+      imageUrl: 'https://i.postimg.cc/Dw926NzR/batu-feringghi-dirty-beach.png',
+      title: 'Batu Ferringhi Beach',
+      details: 'Penang Island\n32% • 1.62 km • 34 Volunteers',
+    ),
+    // I can add more RenCards here to add to the horizontal list view
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,60 +27,18 @@ class ExplorePage extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Color(0xFF2C2C2E),
-                borderRadius: BorderRadius.circular(30.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.5),
-                    spreadRadius: 0,
-                    blurRadius: 0,
-                    offset: Offset(0, 0),
-                  ),
-                ],
-              ),
-              child: TextField(
-                style: TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  hintText: 'Find a Ren',
-                  hintStyle: TextStyle(color: Colors.grey),
-                  prefixIcon: Icon(Icons.search, color: Colors.grey),
-                  suffixIcon: Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-                  border: InputBorder.none,
-                ),
-              ),
-            ),
+      body: Container(
+        height: 275,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: renInfo.length,
+          itemBuilder: (context, index) => Padding(
+            padding: const EdgeInsets.only(right: 12.0),
+            child: buildCard(renInfo[index]),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              'Top Rens Nearby',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-              ),
-            ),
-          ),
-          RenCard(
-            // Make sure to define the following properties in your RenCard widget
-            imageUrl: 'https://i.postimg.cc/Dw926NzR/batu-feringghi-dirty-beach.png',
-            title: 'Batu Ferringhi Beach',
-            location: 'Penang Island',
-            completionPercentage: '32%',
-            distance: '1.62 km',
-            volunteerCount: '34 Volunteers',
-          ),
-          // More RenCards...
-          // The rest of your ListView content...
-        ],
+        ),
       ),
-      // The BottomNavigationBar code remains unchanged...
     );
   }
+
 }
