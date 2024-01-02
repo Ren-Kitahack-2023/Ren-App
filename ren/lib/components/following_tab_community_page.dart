@@ -26,7 +26,7 @@ class FollowingTabCommunityPage extends StatelessWidget {
               },
               style: OutlinedButton.styleFrom(
                 primary: Colors.white,
-                backgroundColor: Colors.green,
+                backgroundColor: Color.fromARGB(255, 134, 162, 126),
                 side: BorderSide(color: Colors.white),
               ),
               child: Text('Add'),
@@ -51,7 +51,7 @@ class FollowingTabCommunityPage extends StatelessWidget {
                   ),
                   SizedBox(height: 8.0),
                   Text(
-                    'See who you already know on AllTrails to keep up with friends and stay inspired.',
+                    'See who you already know on Ren to keep up with friends and stay inspired.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.grey[500],
@@ -64,7 +64,7 @@ class FollowingTabCommunityPage extends StatelessWidget {
                       // TODO: Add button press functionality
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
+                      primary: Color.fromARGB(255, 134, 162, 126),
                       onPrimary: Colors.white,
                     ),
                     child: Text('Connect with Friends'),
