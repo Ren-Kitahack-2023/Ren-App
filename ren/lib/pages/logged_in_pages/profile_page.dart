@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ren/components/profile_information.dart';
 import 'package:ren/components/ren_cards.dart';
+import 'package:ren/components/leaderboard.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key});
@@ -24,9 +25,28 @@ class ProfilePage extends StatelessWidget {
 
       appBar: AppBar(
         title: Text('Profile', style: TextStyle(color: Colors.white),),
+        scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        actions: [IconButton(onPressed: (){}, icon: Icon(Icons.settings))],
+        actions: [PopupMenuButton(  
+          color: Color.fromARGB(255, 66, 66, 71),
+          position: PopupMenuPosition.under,
+          offset: Offset(0, 10),
+          tooltip: '',
+          itemBuilder: (context) =>[
+            PopupMenuItem(
+              child:Text('Logout'),
+              value:'logoout' 
+            )
+          ],
+          onSelected: (String value) {
+            if(value == 'logout'){
+              userSignOut();
+            }
+          },  
+          )
+          
+        ],
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -78,15 +98,16 @@ class ProfilePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 50,),
                           ElevatedButton(
-                            onPressed: (){}, 
+                            onPressed: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Leaderboard()));
+                            }, 
                             style: ElevatedButton.styleFrom(
-                              minimumSize: Size(1000,50), //adjust accordingly
+                              minimumSize: Size(500,40), //adjust accordingly
                               backgroundColor:Color.fromARGB(255, 62, 62, 66),
                               padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                               side: BorderSide.none,
                               shape: StadiumBorder(),
                               textStyle: TextStyle(
-                                fontSize: 30,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
