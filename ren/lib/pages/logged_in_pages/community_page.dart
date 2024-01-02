@@ -42,13 +42,18 @@ class CommunityPage extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
-              child: Text(
-                'Latest nearby',
-                style: TextStyle(color: Colors.white, fontSize: 24), // Styling for the 'Latest nearby' text
+          Padding(
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Text(
+              'Latest\nnearby',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold, // Adjust weight as necessary
+                letterSpacing: 0.8, // Adjust letter spacing as necessary
               ),
             ),
+          ),
             Padding(
               padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
               child: buildSearchBar(),
