@@ -65,24 +65,27 @@ class CommunityPage extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             letterSpacing: 1.0,
                           ),
+
                         ),
                       ],
                     ),
                   ),
                 ),
               ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-                  child: buildSearchBar(),
-                ),
-              ),
             ];
           },
-          body: TabBarView(
+          body: Column(
             children: [
-              LocalTabCommunityPage(),
-              FollowingTabCommunityPage(),
+              SizedBox(height: 8),
+              buildSearchBar(), // Now part of the scrollable content
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    LocalTabCommunityPage(),
+                    FollowingTabCommunityPage(),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
