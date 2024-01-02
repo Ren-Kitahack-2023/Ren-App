@@ -17,10 +17,10 @@ class CommunityPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 12.0), // Control the space between the logo and the text
+                  padding: EdgeInsets.only(left: 12.0), 
                   child: Image.asset(
-                    'lib/images/ren_logo.png', // Replace with your asset path
-                    fit: BoxFit.fitHeight, // Adjust the fit to maintain aspect ratio
+                    'lib/images/ren_logo.png', 
+                    fit: BoxFit.fitHeight, 
                   ),
                 ),
               ],
@@ -121,7 +121,7 @@ class CommunityPage extends StatelessWidget {
     return Container(
       height: 36,
       decoration: BoxDecoration(
-        color: Colors.grey[800], // Adjust color to match design
+        color: Colors.grey[800], 
         borderRadius: BorderRadius.circular(18), // Rounded corners
         boxShadow: [
           BoxShadow(

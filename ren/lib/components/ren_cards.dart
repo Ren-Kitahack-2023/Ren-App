@@ -15,7 +15,7 @@ class RenCard {
 
 Widget buildCard(RenCard info) => Card(
   shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(10.0), // Adjust radius to get the desired roundness
+    borderRadius: BorderRadius.circular(10.0),
   ),
   color: Color(0xFF1C1C1E),
   child: Container(
@@ -24,7 +24,7 @@ Widget buildCard(RenCard info) => Card(
     child: Stack(
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)), // Top corners rounded
+          borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
           child: Image.network(
             info.imageUrl,
             width: 300,
@@ -38,7 +38,7 @@ Widget buildCard(RenCard info) => Card(
             width: 300,
             decoration: BoxDecoration(
               color: Color(0xFF1C1C1E),
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(20.0)), // Bottom corners rounded
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(20.0)),
             ),
             padding: EdgeInsets.all(10),
             child: Text(

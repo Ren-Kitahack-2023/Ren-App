@@ -79,17 +79,17 @@ class ExplorePage extends StatelessWidget {
       child: TextField(
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.black, // Adjusted to black to match the background
+          fillColor: Colors.black, 
           hintText: 'Find a Ren',
           hintStyle:
-              TextStyle(color: Colors.grey[500]), // Adjust the hint text color
+              TextStyle(color: Colors.grey[500]), 
           prefixIcon: Icon(Icons.search, color: Colors.grey[500]),
           suffixIcon: Icon(Icons.keyboard_arrow_down,
               color: Colors.grey[500]), // Added dropdown icon
-          contentPadding: EdgeInsets.zero, // Adjust padding to fit your design
+          contentPadding: EdgeInsets.zero, 
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(
-                30.0), // Increased to get more rounded corners
+                30.0), 
             borderSide: BorderSide.none,
           ),
         ),

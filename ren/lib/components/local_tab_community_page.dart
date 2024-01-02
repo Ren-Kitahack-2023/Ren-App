@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:ren/components/post_cards.dart';
 
 class LocalTabCommunityPage extends StatelessWidget {
-  // Sample list of posts (you can replace this with your data)
   final List<PostCard> posts = [
     PostCard(
       userName: 'NakaNation',

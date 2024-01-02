@@ -36,7 +36,7 @@ class FollowingTabCommunityPage extends StatelessWidget {
               child: Column(
                 children: [
                   Icon(
-                    Icons.person_add, // Change to a custom icon if you have one
+                    Icons.person_add, 
                     size: 48,
                     color: Colors.white,
                   ),
