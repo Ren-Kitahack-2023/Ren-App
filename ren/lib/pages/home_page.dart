@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ren/pages/logged_in_pages/community_page.dart';
 import 'package:ren/pages/logged_in_pages/explore_page.dart';
 import 'package:ren/pages/logged_in_pages/profile_page.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -88,6 +89,37 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+  
+  @override
+  void initState() {
+    super.initState();
+
+    // Cannot make initState() async, so override with an async function to handle notifs
+    setupInteractedMessage();
+  }
+
+  Future<void> setupInteractedMessage() async {
+    // This gets any notifs which causes the previously terminated app to open
+    RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+
+    // Allows us to handle the message (e.g navigate to a specific ren or user)
+    // if (initialMessage != null) {
+    //   _handleMessage(initialMessage);
+    // }
+
+    // Stream listener listens for activity while app is open but in the background
+    // Stream listener
+    // FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+  }
+
+  // TODO: Produce a message with our data that allows us to navigate to the notified ren
+  // void _handleMessage(RemoteMessage message) {
+  //   if (message.data['type'] == 'chat') {
+  //     Navigator.pushNamed(context, '/chat',
+  //       arguments: (message),
+  //     );
+  //   }
+  // }
 
   // Sign user out method
   void userSignOut() async {
