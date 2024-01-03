@@ -65,26 +65,29 @@ class Leaderboard extends StatelessWidget {
           ),
           const SizedBox(height: 25,),
           Text('LeaderBoard', style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),),
-          Container(
-            margin: EdgeInsets.all(30),
-            child: 
-               ListView.separated(
-                shrinkWrap: true,
-                itemBuilder: ((context, index) => ListTile(
-                                                      title: Row(children:[
-                                                        CircleAvatar(
-                                                          radius: 20,
-                                                          backgroundImage: AssetImage('lib/images/profileavatar.png'),
-                                                        ),
-                                                        const SizedBox(width: 10,),
-                                                        Text("John Doe",)
-                                                      ]),
-                                                      leading: 
-                                                        Text('${index + 1}', style: TextStyle(fontWeight: FontWeight.bold),),
-                                                      trailing: Text('${100000/index+1}'.toString().substring(0,5)),)), 
-                separatorBuilder: (context, index) => const Divider(color: Colors.transparent,thickness: 1,), 
-                itemCount: 12),
-            ),
+          SizedBox(
+            height:300,
+            child: Container(
+              margin: EdgeInsets.all(30),
+              child: 
+                 ListView.separated(
+                  shrinkWrap: true,
+                  itemBuilder: ((context, index) => ListTile(
+                                                        title: Row(children:[
+                                                          CircleAvatar(
+                                                            radius: 20,
+                                                            backgroundImage: AssetImage('lib/images/profileavatar.png'),
+                                                          ),
+                                                          const SizedBox(width: 10,),
+                                                          Text("John Doe",)
+                                                        ]),
+                                                        leading: 
+                                                          Text('${index + 1}', style: TextStyle(fontWeight: FontWeight.bold),),
+                                                        trailing: Text('${100000/index+1}'.toString().substring(0,5)),)), 
+                  separatorBuilder: (context, index) => const Divider(color: Colors.transparent,thickness: 1,), 
+                  itemCount: 12),
+              ),
+          ),
            
           //list
         ],
