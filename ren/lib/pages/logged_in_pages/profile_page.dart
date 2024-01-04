@@ -15,15 +15,8 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFF1C1C1E),
 
-      // button to logout
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.logout),
-        onPressed: () {
-          userSignOut();
-        },
 
-
-        ),
+    
 
       appBar: AppBar(
         title: Text('Profile', style: TextStyle(color: Colors.white),),
@@ -31,13 +24,13 @@ class ProfilePage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [PopupMenuButton(  
-          color: Color.fromARGB(255, 66, 66, 71),
+          color: Color(0xFF2C2C2E),
           position: PopupMenuPosition.under,
           offset: Offset(0, 10),
           tooltip: '',
           itemBuilder: (context) =>[
             PopupMenuItem(
-              child:Text('Logout'),
+              child:Text('Logout', style: TextStyle(color: Colors.white),),
               value:'logoout' 
             )
           ],
@@ -57,7 +50,7 @@ class ProfilePage extends StatelessWidget {
         children: [
           // profile information
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.only(bottom: 20.0, left:20.0, right:20.0),
             child: Card(
               color: Color(0xFF2C2C2E),
               shape: RoundedRectangleBorder(
