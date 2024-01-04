@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ren/components/profile_information.dart';
-import 'package:ren/components/ren_cards.dart';
-import 'package:ren/components/leaderboard.dart';
+import 'package:ren/components/achievement_card.dart';
+import 'package:ren/pages/leaderboard.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key});
@@ -50,7 +50,10 @@ class ProfilePage extends StatelessWidget {
           
         ],
       ),
-      body: ListView(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
         children: [
           // profile information
           Padding(
@@ -62,7 +65,7 @@ class ProfilePage extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: ProfileInfo(),
+                child: ProfileInfo(info:['John Doe', 'Kuala Lumpur, KUL, MY', 'Joined 2023']),
               )
             ),
           ),
@@ -88,8 +91,8 @@ class ProfilePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Image.asset("lib/images/streak.png", height: 30, width: 30,),
-                        Text('82 days streak', textAlign: TextAlign.center, style: TextStyle(color: Colors.orange, fontSize: 13, fontWeight: FontWeight.bold, fontFamily: 'Roboto',),),
+                        Image.asset("lib/images/streak.png", height: 50, width: 50,),
+                        Text('82 days streak', textAlign: TextAlign.center, style: TextStyle(color: Colors.orange, fontSize: 15, fontWeight: FontWeight.bold, fontFamily: 'Roboto',),),
                       ],
                     ),
                   ),
@@ -98,91 +101,64 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20,),
-          Padding(
-            padding: EdgeInsets.all(15.0),
-            child: Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.grey, width: 1), color: Color(0xFF2C2C2E)),
-              child: Column(
-                children: [
-                   
-                ],
-              )
-            ),
-          )
-
-
-
-
-                // Column(
-                //   children: [
-                //     Text('  82 days', textAlign: TextAlign.center, style: TextStyle(color: Colors.orange, fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Roboto',),),
-                //     Image.asset("lib/images/streak.png", height: 100, width: 100,),
-                //     const SizedBox(height: 20,),
-                //     Container(
-                //       color: Colors.transparent,
-                //       child:Column(
-                //         children:[
-                //           Container(
-                //             child: Column(
-                //               children: [
-                //                 Image.asset("lib/images/streak.png", height: 100, width: 100,),
-                //                 Text('1st place', textAlign: TextAlign.center, style: TextStyle(color: Colors.orange, fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Roboto',),),
-                //               ],
-                //             ),
-                //           ),
-                          
-                //           Row(
-                //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //             children: [
-                //               Container(
- 
-                //                   child: Column(
-                //                     children: [
-                //                       Image.asset("lib/images/streak.png", height: 100, width: 100,),
-                //                       Text('2nd place', textAlign: TextAlign.center, style: TextStyle(color: Colors.orange, fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Roboto',),),
-                //                     ] ,
-                //                   ),
-                //               ),
-                //               Container(
-    
-                //                 child: Column(
-                //                   children: [
-                //                     Image.asset("lib/images/streak.png", height: 100, width: 100,),
-                //                     Text('3rd place', textAlign: TextAlign.center, style: TextStyle(color: Colors.orange, fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Roboto',),),
-                //                   ],
-                //                 ),
-                //               ),
-                //             ]  
-                //           ),
-                //           const SizedBox(height: 50,),
-                //           ElevatedButton(
-                //             onPressed: (){
-                //               Navigator.push(context, MaterialPageRoute(builder: (context) => Leaderboard()));
-                //             }, 
-                //             style: ElevatedButton.styleFrom(
-                //               minimumSize: Size(500,40), //adjust accordingly
-                //               backgroundColor:Color.fromARGB(255, 62, 62, 66),
-                //               padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                //               side: BorderSide.none,
-                //               shape: StadiumBorder(),
-                //               textStyle: TextStyle(
-                //                 fontWeight: FontWeight.bold,
-                //               ),
-                //             ),
-                //             child: Text("View Leaderboard", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Roboto',),),
-                            
-                //             )
-                //         ]
-                          
-                //       )
+          Container(
+            
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
+                Text('Achievement', textAlign: TextAlign.start, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Roboto', ),),
+                const SizedBox(height: 20,),
+                Container(
+                  height: 345,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF2C2C2E),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AchievementCard(imageurl: 'lib/images/Gold_Medal.png', text: '23 Ren Hosted'),
+                      AchievementCard(imageurl: 'lib/images/Silver_Medal.png', text: '2 Ren Hosted'),
+                      AchievementCard(imageurl: 'lib/images/Bronze_Medal.png', text: '20+ kg Cleaned', subtext:'24 kilograms Cleaned'),
+                    ],
+                  ),
+                )
+              ],
+            )
                     
-                      
-
-
-                  ],
+                  
+          ),
+          const SizedBox(height: 30,),
+          
+          Center(
+            child: ElevatedButton(
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Leaderboard()));
+              }, 
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(350, 50),
+                backgroundColor:Color(0xFF2C2C2E),
+                // padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                side: BorderSide.none,
+                shape: StadiumBorder(),
+                textStyle: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
+              ),
+              child: Text("View Leaderboard", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Roboto',),),
               
-                );
+              ),
+          ),
+          const SizedBox(height: 20,),
+        ]
+          
+      )
+              
+    )
+    );
                  
   }
 }

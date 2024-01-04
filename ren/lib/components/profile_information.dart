@@ -3,7 +3,24 @@
 import "package:flutter/material.dart";
 
 class ProfileInfo extends StatelessWidget {
-  const ProfileInfo({super.key});
+  final List<String> info;
+
+
+  const ProfileInfo({super.key, required this.info});
+
+  List<Widget> buildChildren(List<String> info) {
+    List<Widget> children = List.filled(3, Text(''));
+    for (var i = 0; i < info.length; i++) {
+      if (i == 0){
+        children[i] = Text(info[i],style: TextStyle(color: Colors.green, fontSize:15, fontWeight: FontWeight.bold, fontFamily: 'Roboto',));
+      }
+      else{
+        children[i] = Text(info[i],style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold, fontFamily: 'Roboto',));
+      }
+     
+    }
+    return children;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +39,7 @@ class ProfileInfo extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('John Doe', style: TextStyle(color: Colors.green, fontSize:15, fontWeight: FontWeight.bold, fontFamily: 'Roboto',),),
-                  Text('Kuala Lumpur, KUL, MY',style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold, fontFamily: 'Roboto',),),
-                  Text('Joined 2023', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold, fontFamily: 'Roboto',),),
-                ],
+                children: buildChildren(info),
               ),
             ),
           ),
