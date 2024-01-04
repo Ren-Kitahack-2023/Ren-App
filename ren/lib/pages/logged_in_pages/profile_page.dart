@@ -10,13 +10,18 @@ import 'package:ren/pages/leaderboard.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key});
 
+  // Sign user out method
+  void userSignOut() async {
+    await FirebaseAuth.instance.signOut();
+
+    // sign out from google
+    await GoogleSignIn().signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF1C1C1E),
-
-
-    
 
       appBar: AppBar(
         title: Text('Profile', style: TextStyle(color: Colors.white),),
@@ -31,7 +36,7 @@ class ProfilePage extends StatelessWidget {
           itemBuilder: (context) =>[
             PopupMenuItem(
               child:Text('Logout', style: TextStyle(color: Colors.white),),
-              value:'logoout' 
+              value:'logout' 
             )
           ],
           onSelected: (String value) {
@@ -156,12 +161,6 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
-  // Sign user out method
-  void userSignOut() async {
-    await FirebaseAuth.instance.signOut();
-
-    // sign out from google
-    await GoogleSignIn().signOut();
-  }
+  
 
 
