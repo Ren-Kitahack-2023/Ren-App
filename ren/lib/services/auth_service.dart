@@ -7,7 +7,7 @@ class AuthService {
   signInWithGoogle() async {
     try {
 
-      // begion the sign in process
+      // begin the sign in process
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       
       // get the authentication
