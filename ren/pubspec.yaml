@@ -41,6 +41,7 @@ dependencies:
   google_sign_in: ^6.2.1
   firebase_messaging: ^14.7.9
   google_maps_flutter: ^2.5.1
+  custom_info_window: ^1.0.1
 
 dev_dependencies:
   flutter_test:
