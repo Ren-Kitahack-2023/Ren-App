@@ -5,6 +5,7 @@ import 'package:ren/pages/logged_in_pages/community_page.dart';
 import 'package:ren/pages/logged_in_pages/explore_page.dart';
 import 'package:ren/pages/logged_in_pages/profile_page.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:ren/pages/logged_in_pages/ren_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> children = [
     ExplorePage(),
     CommunityPage(),
-    ExplorePage(),
+    RenPage(),
     ExplorePage(),
     ProfilePage(),
   ];
