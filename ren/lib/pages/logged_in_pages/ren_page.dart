@@ -1,5 +1,6 @@
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 const LatLng monashLocation = LatLng(3.0650, 101.6009);
@@ -15,9 +16,9 @@ class _RenPageState extends State<RenPage> {
   // onMapCreated callback provides us with a controller that we can use to interact with the map, so I will use this thingy to play with the mapzzz hehe
   late GoogleMapController mapController;
 
+  CustomInfoWindowController _customInfoWindowController =
+      CustomInfoWindowController();
 
-  CustomInfoWindowController _customInfoWindowController = CustomInfoWindowController();
-  
   final List<Marker> _markers = <Marker>[];
   final List<LatLng> _latLng = [
     LatLng(3.0664778738744216, 101.59772394941416),
@@ -28,7 +29,25 @@ class _RenPageState extends State<RenPage> {
     LatLng(3.061067555978396, 101.59833549297282),
   ];
 
+  // list of text for info window
+  final List<String> _infoWindowText = [
+    'Sewage Drain',
+    'Beachfront',
+    'Tasik Kelana Square',
+    'Sunway Geo Lake',
+    'Sunway House Waterfront',
+    'Sunway International School',
+  ];
 
+  // list of images for info window
+  final List<String> _infoWindowImages = [
+    'https://i.postimg.cc/66j3dRtc/dirty-beach.png',
+    'https://i.postimg.cc/66j3dRtc/dirty-beach.png',
+    'https://i.postimg.cc/66j3dRtc/dirty-beach.png',
+    'https://i.postimg.cc/66j3dRtc/dirty-beach.png',
+    'https://i.postimg.cc/66j3dRtc/dirty-beach.png',
+    'https://i.postimg.cc/66j3dRtc/dirty-beach.png',
+  ];
 
   @override
   void initState() {
@@ -45,58 +64,136 @@ class _RenPageState extends State<RenPage> {
         Marker(
           markerId: MarkerId(_latLng[i].toString()),
           icon: await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(), 'lib/images/ren_logo_marker.png'),
-        position: _latLng[i],
-
-        onTap: () {
-          _customInfoWindowController.addInfoWindow!(
-            Container(
-              height: 300,
-              width: 200,
-              decoration: BoxDecoration(
-                color: Color(0xFF1C1C1E),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child:  Column(
-                children: [
-                  Container(
-                    height: 100,
+              const ImageConfiguration(), 'lib/images/ren_logo_marker.png'),
+          position: _latLng[i],
+          onTap: () {
+            _customInfoWindowController.addInfoWindow!(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                    height: 300,
                     width: 200,
                     decoration: BoxDecoration(
+                      color: Color(0xFF1C1C1E),
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.grey, width: 2),
-                      image: DecorationImage(
-                        image: Image.network('https://i.postimg.cc/66j3dRtc/dirty-beach.png').image,
-                        fit: BoxFit.cover,
-                      ),
                     ),
-                  ),
-                  SizedBox(height: 10,),
-                  Text(
-                    'Naka\'s Beach',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              )
-            ),
+                    child: Row(
+                      children: [
+                        // Left section of CustomInfoWindow
+                        Container(
+                          height: MediaQuery.of(context).size.height,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            // border: Border.all(color: Colors.grey, width: 2),
+                            image: DecorationImage(
+                              image: Image.network(
+                                      'https://i.postimg.cc/nhgGCFn2/taman-tasik-kelana.jpg')
+                                  .image,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
 
+                        // Middle section of CustomInfoWindow
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Container(
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: <Widget>[
+                                      Text(
+                                        'Easy • ',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: 'Roboto',
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.green[600],
+                                        size: 12,
+                                      ),
+                                      Text(
+                                        ' 4.2(25)',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: 'Roboto',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    _infoWindowText[i],
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily:
+                                          GoogleFonts.roboto().fontFamily,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Persiaran Tasik Timur',
+                                    style: TextStyle(
+                                      color: Colors.white.withOpacity(0.9),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: 'Roboto',
+                                    ),
+                                  ),
+                                  Text(
+                                    '2.9 km - Est. 39m',
+                                    style: TextStyle(
+                                      color: Colors.white.withOpacity(0.9),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: 'Roboto',
+                                    ),
+                                  ),
+                                ]),
+                          ),
+                        ),
 
-            _latLng[i],
-          );
-        },
+                        SizedBox(
+                          width: 20,
+                        ),
 
-
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            SizedBox(height: 10),
+                            Icon(
+                              Icons.bookmark,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                            SizedBox(height: 60),
+                            Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                          ],
+                        )
+                      ],
+                    )),
+              ),
+              _latLng[i],
+            );
+          },
         ),
       );
-
-      setState(() {
-
-
-      });
+      setState(() {});
     }
   }
 
@@ -106,16 +203,16 @@ class _RenPageState extends State<RenPage> {
       backgroundColor: Color(0xFF1C1C1E),
 
       // set up google map
-      body: Stack(
-        children: [GoogleMap(
+      body: Stack(children: [
+        GoogleMap(
           initialCameraPosition: CameraPosition(
             target: monashLocation,
             zoom: 15,
           ),
-        
+
           // set up markers
           markers: Set<Marker>.of(_markers),
-        
+
           // on tap marker
           onTap: (position) {
             _customInfoWindowController.hideInfoWindow!();
@@ -125,28 +222,23 @@ class _RenPageState extends State<RenPage> {
           onCameraMove: (position) {
             _customInfoWindowController.onCameraMove!();
           },
-        
-        
+
           // set up controller
           onMapCreated: (controller) {
             mapController = controller;
             _customInfoWindowController.googleMapController = controller;
           },
-        
-        
-        
         ),
-        
-      CustomInfoWindow(
-        controller: _customInfoWindowController,
-        height: 150,
-        width: 200,
-        offset: 50,
-      ),
 
-        ]
-      ),
-
+        Positioned(
+          bottom: 0,
+          child: CustomInfoWindow(
+              controller: _customInfoWindowController,
+              height: 150,
+              width: MediaQuery.of(context).size.width,
+              offset: 50),
+        ),
+      ]),
     );
   }
 
