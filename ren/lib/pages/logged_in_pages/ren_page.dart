@@ -203,8 +203,9 @@ class _RenPageState extends State<RenPage> {
       backgroundColor: Color(0xFF1C1C1E),
 
       // set up google map
-      body: Stack(children: [
-        GoogleMap(
+      body: Stack(
+        children: [
+          GoogleMap(
           initialCameraPosition: CameraPosition(
             target: monashLocation,
             zoom: 15,
@@ -228,6 +229,51 @@ class _RenPageState extends State<RenPage> {
             mapController = controller;
             _customInfoWindowController.googleMapController = controller;
           },
+        ),
+
+               Positioned(
+          top: 0, // Set to 0 to start at the very top of the screen
+          child: Container(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).padding.top, // Padding for status bar
+              bottom: 8.0, // Additional padding at the bottom of the container
+            ),
+            width: MediaQuery.of(context).size.width, // Full width of the device
+            color: Color(0xFF1C1C1E),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0), // Horizontal padding
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0), // Horizontal padding inside the search bar
+                    decoration: BoxDecoration(
+                      color: Colors.white, // Solid white background color for the search bar
+                      borderRadius: BorderRadius.circular(30.0), // Rounded corners
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search...',
+                        border: InputBorder.none,
+                        suffixIcon: Icon(Icons.search),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10), // Space between search bar and button
+                  ElevatedButton(
+                    onPressed: () {
+                      // Action when 'Create Ren' button is pressed
+                    },
+                    child: Text('Create Ren'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.green, // Solid background color for the button
+                      onPrimary: Colors.white, // Text color for the button
+                      shape: StadiumBorder(), // Rounded edges for the button
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
 
         Positioned(
