@@ -165,25 +165,45 @@ class _RenPageState extends State<RenPage> {
                         ),
 
                         SizedBox(
-                          width: 20,
+                          width: 10,
                         ),
 
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            SizedBox(height: 10),
-                            Icon(
-                              Icons.bookmark,
-                              color: Colors.white,
-                              size: 24,
+                        ElevatedButton(
+                          onPressed: () {
+                            // Define what happens when the button is pressed
+                          },
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min, // Use the minimum space required by the children
+                            children: <Widget>[
+                              Text(
+                                'Create',
+                                style: TextStyle(
+                                  fontSize: 14, // Smaller font size for the text
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: GoogleFonts.roboto().fontFamily,
+                                ),
+                              ),
+                              Text(
+                                'Ren',
+                                style: TextStyle(
+                                  fontSize: 14, // Smaller font size for the text
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: GoogleFonts.roboto().fontFamily,
+                                ),
+                              ),
+                            ],
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Color(0xFFB5DBAA), // Background color of the button
+                            onPrimary: Colors.grey[800], // Text color of the button
+                            padding: EdgeInsets.symmetric(vertical: 2), // Reduced padding
+                            elevation: 2, // Smaller elevation for less shadow
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ), // Square edges
                             ),
-                            SizedBox(height: 60),
-                            Icon(
-                              Icons.keyboard_arrow_down,
-                              color: Colors.white,
-                              size: 24,
-                            ),
-                          ],
+                          ),
                         )
                       ],
                     )),
@@ -203,9 +223,8 @@ class _RenPageState extends State<RenPage> {
       backgroundColor: Color(0xFF1C1C1E),
 
       // set up google map
-      body: Stack(
-        children: [
-          GoogleMap(
+      body: Stack(children: [
+        GoogleMap(
           initialCameraPosition: CameraPosition(
             target: monashLocation,
             zoom: 15,
@@ -230,57 +249,61 @@ class _RenPageState extends State<RenPage> {
             _customInfoWindowController.googleMapController = controller;
           },
         ),
-
-               Positioned(
+        Positioned(
           top: 0, // Set to 0 to start at the very top of the screen
           child: Container(
             padding: EdgeInsets.only(
               top: MediaQuery.of(context).padding.top, // Padding for status bar
               bottom: 8.0, // Additional padding at the bottom of the container
             ),
-            width: MediaQuery.of(context).size.width, // Full width of the device
+            width:
+                MediaQuery.of(context).size.width, // Full width of the device
             color: Color(0xFF1C1C1E),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0), // Horizontal padding
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0), // Horizontal padding
               child: Column(
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0), // Horizontal padding inside the search bar
+                    padding: const EdgeInsets.symmetric(
+                        horizontal:
+                            15.0), // Horizontal padding inside the search bar
                     decoration: BoxDecoration(
-                      color: Colors.white, // Solid white background color for the search bar
-                      borderRadius: BorderRadius.circular(30.0), // Rounded corners
+                        color: Color(0xFF1D2414), // Solid color 1D2414 for the search bar
+                      borderRadius:
+                          BorderRadius.circular(30.0), // Rounded corners
                     ),
                     child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Search...',
-                        border: InputBorder.none,
-                        suffixIcon: Icon(Icons.search),
-                      ),
-                    ),
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.black, 
+                              hintText: 'Search...',
+                              hintStyle:
+                                  TextStyle(color: Colors.grey[500]), 
+                              prefixIcon: Icon(Icons.search, color: Colors.grey[500]),
+                              suffixIcon: Icon(Icons.filter_list,
+                                  color: Colors.grey[500]), // Added dropdown icon
+                              contentPadding: EdgeInsets.zero, 
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(
+                                    30.0), 
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                            style: TextStyle(color: Colors.white),
+                          ),
                   ),
                   SizedBox(height: 10), // Space between search bar and button
-                  ElevatedButton(
-                    onPressed: () {
-                      // Action when 'Create Ren' button is pressed
-                    },
-                    child: Text('Create Ren'),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.green, // Solid background color for the button
-                      onPrimary: Colors.white, // Text color for the button
-                      shape: StadiumBorder(), // Rounded edges for the button
-                    ),
-                  ),
                 ],
               ),
             ),
           ),
         ),
-
         Positioned(
           bottom: 0,
           child: CustomInfoWindow(
               controller: _customInfoWindowController,
-              height: 150,
+              height: 130,
               width: MediaQuery.of(context).size.width,
               offset: 50),
         ),
