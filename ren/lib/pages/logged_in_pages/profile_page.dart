@@ -24,7 +24,6 @@ class ProfilePage extends StatelessWidget {
       backgroundColor: Color(0xFF1C1C1E),
 
       appBar: AppBar(
-        title: Text('Profile', style: TextStyle(color: Colors.white),),
         scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
         elevation: 0,
