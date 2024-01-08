@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:ren/components/profile_information.dart';
 
 class Leaderboard extends StatelessWidget {
+
   const Leaderboard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    
+    final List<String> examples = ['John Doe', 'Chloe Ayers', 'Simeon Alvarado', 'Farrah Osborn', 'Melisa Carroll', 'Ela Brown', 'Camilla Stuart', 'Hana York', 'Layton Hamilton', 'Arun Wilkinson', 'Leon Beard', 'Levi O\'Brien','Carrie O\'Ryan'];
     return Scaffold(
       backgroundColor: Color(0xFF1C1C1E),
       appBar: AppBar( 
@@ -53,7 +56,7 @@ class Leaderboard extends StatelessWidget {
                                                               backgroundImage: AssetImage('lib/images/profileavatar.png'),
                                                             ),
                                                             const SizedBox(width: 20,),
-                                                            Text("John Doe", style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold, fontFamily: 'Roboto',))
+                                                            Text(examples[index], style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold, fontFamily: 'Roboto',))
                                                           ]
                                                         ),
                                                         leading: Text('${index + 1}', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),),
