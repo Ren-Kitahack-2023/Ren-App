@@ -70,143 +70,145 @@ class _RenPageState extends State<RenPage> {
             _customInfoWindowController.addInfoWindow!(
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                    height: 300,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF1C1C1E),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        // Left section of CustomInfoWindow
-                        Container(
-                          height: MediaQuery.of(context).size.height,
-                          width: 100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            // border: Border.all(color: Colors.grey, width: 2),
-                            image: DecorationImage(
-                              image: Image.network(
-                                      'https://i.postimg.cc/nhgGCFn2/taman-tasik-kelana.jpg')
-                                  .image,
-                              fit: BoxFit.cover,
+                child: Expanded(
+                  child: Container(
+                      height: 300,
+                      width: 200,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF1C1C1E),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          // Left section of CustomInfoWindow
+                          Container(
+                            height: MediaQuery.of(context).size.height,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              // border: Border.all(color: Colors.grey, width: 2),
+                              image: DecorationImage(
+                                image: Image.network(
+                                        'https://i.postimg.cc/nhgGCFn2/taman-tasik-kelana.jpg')
+                                    .image,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-
-                        // Middle section of CustomInfoWindow
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Container(
+                          SizedBox(
+                            width: 10,
+                          ),
+                  
+                          // Middle section of CustomInfoWindow
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Container(
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: <Widget>[
+                                        Text(
+                                          'Easy • ',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: 'Roboto',
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: Colors.green[600],
+                                          size: 12,
+                                        ),
+                                        Text(
+                                          ' 4.2(25)',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.normal,
+                                            fontFamily: 'Roboto',
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      _infoWindowText[i],
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily:
+                                            GoogleFonts.roboto().fontFamily,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Persiaran Tasik Timur',
+                                      style: TextStyle(
+                                        color: Colors.white.withOpacity(0.9),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: 'Roboto',
+                                      ),
+                                    ),
+                                    Text(
+                                      '2.9 km - Est. 39m',
+                                      style: TextStyle(
+                                        color: Colors.white.withOpacity(0.9),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: 'Roboto',
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+                          ),
+                  
+                          SizedBox(
+                            width: 10,
+                          ),
+                  
+                          ElevatedButton(
+                            onPressed: () {
+                              // Define what happens when the button is pressed
+                            },
                             child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: <Widget>[
-                                      Text(
-                                        'Easy • ',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal,
-                                          fontFamily: 'Roboto',
-                                        ),
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.green[600],
-                                        size: 12,
-                                      ),
-                                      Text(
-                                        ' 4.2(25)',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal,
-                                          fontFamily: 'Roboto',
-                                        ),
-                                      ),
-                                    ],
+                              mainAxisSize: MainAxisSize.min, // Use the minimum space required by the children
+                              children: <Widget>[
+                                Text(
+                                  'Create',
+                                  style: TextStyle(
+                                    fontSize: 14, // Smaller font size for the text
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: GoogleFonts.roboto().fontFamily,
                                   ),
-                                  Text(
-                                    _infoWindowText[i],
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily:
-                                          GoogleFonts.roboto().fontFamily,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Persiaran Tasik Timur',
-                                    style: TextStyle(
-                                      color: Colors.white.withOpacity(0.9),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: 'Roboto',
-                                    ),
-                                  ),
-                                  Text(
-                                    '2.9 km - Est. 39m',
-                                    style: TextStyle(
-                                      color: Colors.white.withOpacity(0.9),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: 'Roboto',
-                                    ),
-                                  ),
-                                ]),
-                          ),
-                        ),
-
-                        SizedBox(
-                          width: 10,
-                        ),
-
-                        ElevatedButton(
-                          onPressed: () {
-                            // Define what happens when the button is pressed
-                          },
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min, // Use the minimum space required by the children
-                            children: <Widget>[
-                              Text(
-                                'Create',
-                                style: TextStyle(
-                                  fontSize: 14, // Smaller font size for the text
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: GoogleFonts.roboto().fontFamily,
                                 ),
-                              ),
-                              Text(
-                                'Ren',
-                                style: TextStyle(
-                                  fontSize: 14, // Smaller font size for the text
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: GoogleFonts.roboto().fontFamily,
+                                Text(
+                                  'Ren',
+                                  style: TextStyle(
+                                    fontSize: 14, // Smaller font size for the text
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: GoogleFonts.roboto().fontFamily,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Color(0xFFB5DBAA), // Background color of the button
-                            onPrimary: Colors.grey[800], // Text color of the button
-                            padding: EdgeInsets.symmetric(vertical: 2), // Reduced padding
-                            elevation: 2, // Smaller elevation for less shadow
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ), // Square edges
+                              ],
                             ),
-                          ),
-                        )
-                      ],
-                    )),
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0xFFB5DBAA), // Background color of the button
+                              onPrimary: Colors.grey[800], // Text color of the button
+                              padding: EdgeInsets.symmetric(vertical: 2), // Reduced padding
+                              elevation: 2, // Smaller elevation for less shadow
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ), // Square edges
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                ),
               ),
               _latLng[i],
             );
@@ -297,7 +299,7 @@ class _RenPageState extends State<RenPage> {
                 ],
               ),
             ),
-          ),
+          ), 
         ),
         Positioned(
           bottom: 0,
